@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../utils/api';
-import { Search, CreditCard, Loader2, CheckCircle2, Phone, Tag, Wifi, AlertCircle, LogIn, ChevronRight, Shield, Zap, Clock, MapPin, X, MonitorPlay } from 'lucide-react';
+import { Search, CreditCard, Loader2, CheckCircle2, Phone, Tag, Wifi, AlertCircle, LogIn, ChevronRight, Shield, Zap, Clock, MapPin, X, MonitorPlay, Download, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const RAZORPAY_KEY = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_dummy_key_replace_me';
@@ -214,43 +214,68 @@ const QuickPay = () => {
               </div>
             </div>
 
-            {/* Providing Services Card in Sidebar */}
-            <div className="qp-areas-sidebar-card">
-              <div className="qp-areas-sidebar-header">
-                <div className="qp-sidebar-icon">
-                  <MapPin size={18} />
+            {/* Available Packs in Sidebar */}
+            <div className="qp-packs-sidebar">
+              {/* Zeta Pack */}
+              <div className="qp-pack-card qp-pack-zeta">
+                <div className="qp-pack-header">
+                  <div>
+                    <h4 className="qp-pack-title">Zeta Pack</h4>
+                    <p className="qp-pack-price">₹999<span>/mo</span></p>
+                  </div>
+                  <div className="qp-pack-icon"><Zap size={20} /></div>
                 </div>
-                <div>
-                  <h3 className="qp-sidebar-title">Providing Services</h3>
-                  <p className="qp-sidebar-sub">Currently active in</p>
-                </div>
-              </div>
-              
-              <div className="qp-marquee-container qp-marquee-sidebar">
-                <div className="qp-marquee-content">
-                  {[
-                    "Sripathy Nagar",
-                    "Nethaji nagar phase 1",
-                    "Nethaji nagar phase 2",
-                    "Parsen Aranyaka",
-                    "Parsen Anthara",
-                    "Parsen",
-                    "Nanjundapuram check post",
-                    "Sripathy Nagar",
-                    "Nethaji nagar phase 1",
-                    "Nethaji nagar phase 2",
-                    "Parsen Aranyaka",
-                    "Parsen Anthara",
-                    "Parsen",
-                    "Nanjundapuram check post"
-                  ].map((place, i) => (
-                    <div key={i} className="qp-marquee-item">
-                      <ChevronRight size={14} className="qp-item-icon" />
-                      {place}
-                    </div>
-                  ))}
+                <div className="qp-pack-features">
+                  <span><CheckCircle2 size={12}/> 100 Mbps Unlimited</span>
+                  <span><CheckCircle2 size={12}/> OTT Subscriptions</span>
+                  <span><CheckCircle2 size={12}/> Cable TV</span>
                 </div>
               </div>
+
+              {/* Beta Pack */}
+              <div className="qp-pack-card qp-pack-beta">
+                <div className="qp-pack-header">
+                  <div>
+                    <h4 className="qp-pack-title">Beta Pack</h4>
+                    <p className="qp-pack-price">₹749<span>/mo</span></p>
+                  </div>
+                  <div className="qp-pack-icon"><Wifi size={20} /></div>
+                </div>
+                <div className="qp-pack-features">
+                  <span><CheckCircle2 size={12}/> 100 Mbps Unlimited</span>
+                  <span><CheckCircle2 size={12}/> Cable TV</span>
+                </div>
+              </div>
+
+              {/* Alpha Pack */}
+              <div className="qp-pack-card qp-pack-alpha">
+                <div className="qp-pack-header">
+                  <div>
+                    <h4 className="qp-pack-title">Alpha Pack</h4>
+                    <p className="qp-pack-price">₹499<span>/mo</span></p>
+                  </div>
+                  <div className="qp-pack-icon"><MonitorPlay size={20} /></div>
+                </div>
+                <div className="qp-pack-features">
+                  <span><CheckCircle2 size={12}/> Internet Access</span>
+                  <span><CheckCircle2 size={12}/> 70 Mbps Unlimited</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Channels List Download Segment */}
+            <div className="qp-channels-dl-card">
+              <div className="qp-cdl-icon-wrap">
+                <FileText size={20} className="qp-cdl-icon" />
+              </div>
+              <div className="qp-cdl-content">
+                <h4>Channels List</h4>
+                <p>View all available channels</p>
+              </div>
+              <a href="/sample_template.csv" download="Sharanmita_Channels.csv" className="qp-cdl-btn">
+                <Download size={14} />
+                <span>Download</span>
+              </a>
             </div>
           </div>
         </aside>
@@ -495,11 +520,18 @@ const QuickPay = () => {
               <div className="qp-promo-badge">Mega Deal</div>
               <h4>Triple Play Special</h4>
               <div className="qp-promo-features">
-                 <span className="qp-feat"><Wifi size={12}/> Cable</span>
-                 <span className="qp-feat-plus">+</span>
-                 <span className="qp-feat"><Zap size={12}/> Internet</span>
-                 <span className="qp-feat-plus">+</span>
-                 <span className="qp-feat"><MonitorPlay size={12}/> OTT</span>
+                 <div className="qp-feat">
+                   <div style={{display: 'flex', gap: '6px', alignItems: 'center'}}><Zap size={14}/> Internet</div>
+                   <div className="qp-feat-desc">100 Mbps Unlimited</div>
+                 </div>
+                 <div className="qp-feat">
+                   <div style={{display: 'flex', gap: '6px', alignItems: 'center'}}><Wifi size={14}/> Cable</div>
+                   <div className="qp-feat-desc">300+ TV Channels</div>
+                 </div>
+                 <div className="qp-feat">
+                   <div style={{display: 'flex', gap: '6px', alignItems: 'center'}}><MonitorPlay size={14}/> OTT</div>
+                   <div className="qp-feat-desc">5 Major OTT</div>
+                 </div>
               </div>
               <div className="qp-promo-price" style={{marginBottom: '10px'}}>₹4,999</div>
               <p>Free Installation + 7 Months Service</p>
@@ -668,8 +700,9 @@ const QuickPay = () => {
         }
         .qp-channels-overlay {
           position: absolute; inset: 0;
-          display: flex; flex-direction: column; justify-content: flex-end;
+          display: flex; flex-direction: column; justify-content: flex-start;
           padding: 16px;
+          background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 40%);
         }
         .qp-channels-badge {
           align-self: flex-start;
@@ -679,10 +712,10 @@ const QuickPay = () => {
           border-radius: 4px;
           font-size: 9px; font-weight: 900;
           text-transform: uppercase; letter-spacing: 1px;
-          margin-bottom: 8px;
+          margin-bottom: 6px;
           animation: pulse 2s infinite;
         }
-         .qp-channels-title { font-size: 15px; font-weight: 800; color: #f1f5f9; margin: 0 0 50px 0; }
+        .qp-channels-title { font-size: 16px; font-weight: 800; color: #f1f5f9; margin: 0; }
 
         .qp-channels-logos-bar {
           position: absolute;
@@ -789,15 +822,16 @@ const QuickPay = () => {
         .qp-promo-note { font-size: 11px; color: #34d399; font-weight: 700; text-transform: uppercase; }
         
         .qp-promo-features {
-          display: flex; align-items: center; justify-content: center; gap: 6px;
-          margin-bottom: 12px;
+          display: flex; flex-direction: column; align-items: stretch; gap: 8px;
+          margin-bottom: 16px;
         }
         .qp-feat {
-          display: flex; align-items: center; gap: 4px;
-          font-size: 11px; font-weight: 700; color: #a5b4fc;
-          background: rgba(79,70,229,0.2); padding: 4px 8px; border-radius: 6px;
+          display: flex; align-items: center; justify-content: space-between;
+          font-size: 12px; font-weight: 700; color: #a5b4fc;
+          background: rgba(79,70,229,0.15); padding: 10px 14px; border-radius: 10px;
+          border: 1px solid rgba(79,70,229,0.2);
         }
-        .qp-feat-plus { color: #6366f1; font-weight: 800; font-size: 12px; }
+        .qp-feat-desc { color: #f1f5f9; font-weight: 800; font-size: 11px; }
 
         .qp-super-card {
           position: relative; overflow: hidden;
@@ -806,32 +840,92 @@ const QuickPay = () => {
           border-radius: 20px; padding: 2px;
           margin-top: 10px;
         }
-        .qp-areas-sidebar-card {
+        .qp-packs-sidebar {
+          display: flex; flex-direction: column; gap: 14px; margin-top: 20px;
+        }
+        .qp-pack-card {
           position: relative; overflow: hidden;
-          background: rgba(255,255,255,0.02);
+          background: rgba(255,255,255,0.03);
           border: 1px solid rgba(255,255,255,0.06);
-          border-radius: 20px; padding: 24px;
-          margin-top: 20px;
-          box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
+          border-radius: 16px; padding: 16px;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
-        .qp-areas-sidebar-header {
+        .qp-pack-card:hover {
+          background: rgba(255,255,255,0.05);
+          border-color: rgba(255,255,255,0.15);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .qp-pack-zeta {
+          background: linear-gradient(135deg, rgba(79,70,229,0.1) 0%, rgba(139,92,246,0.05) 100%);
+          border-color: rgba(139,92,246,0.2);
+        }
+        .qp-pack-header {
+          display: flex; justify-content: space-between; align-items: flex-start;
+          margin-bottom: 14px;
+        }
+        .qp-pack-title { font-size: 15px; font-weight: 800; color: #f1f5f9; margin: 0 0 4px; }
+        .qp-pack-price { font-size: 22px; font-weight: 900; color: #fff; line-height: 1; margin: 0; }
+        .qp-pack-price span { font-size: 11px; color: #94a3b8; font-weight: 600; margin-left: 2px; }
+        .qp-pack-icon {
+          width: 36px; height: 36px;
+          border-radius: 10px; display: flex; align-items: center; justify-content: center;
+          background: rgba(255,255,255,0.1); color: #fff;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .qp-pack-zeta .qp-pack-icon { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+        .qp-pack-beta .qp-pack-icon { background: linear-gradient(135deg, #059669, #10b981); }
+        .qp-pack-alpha .qp-pack-icon { background: linear-gradient(135deg, #d946ef, #8b5cf6); }
+        
+        .qp-pack-features {
+          display: flex; flex-direction: column; gap: 8px;
+        }
+        .qp-pack-features span {
+          display: flex; align-items: center; gap: 8px;
+          font-size: 12px; color: #cbd5e1; font-weight: 600;
+        }
+        .qp-pack-features svg { color: #34d399; }
+
+        .qp-channels-dl-card {
+          margin-top: 14px;
           display: flex; align-items: center; gap: 12px;
-          margin-bottom: 16px;
-          border-bottom: 1px solid rgba(255,255,255,0.06);
-          padding-bottom: 16px;
+          padding: 14px 16px;
+          background: rgba(255,255,255,0.03);
+          border: 1px dashed rgba(255,255,255,0.15);
+          border-radius: 16px;
+          transition: all 0.3s ease;
         }
-        .qp-marquee-sidebar {
-          height: 240px;
-          overflow: hidden;
-          position: relative;
-          margin-top: 10px;
+        .qp-channels-dl-card:hover {
+          background: rgba(255,255,255,0.06);
+          border-color: rgba(255,255,255,0.25);
         }
-        .qp-marquee-sidebar::before,
-        .qp-marquee-sidebar::after {
-          content: ''; position: absolute; left: 0; right: 0; height: 50px; z-index: 2; pointer-events: none;
+        .qp-cdl-icon-wrap {
+          width: 36px; height: 36px;
+          border-radius: 10px;
+          display: flex; align-items: center; justify-content: center;
+          background: rgba(255,255,255,0.1); color: #94a3b8;
         }
-        .qp-marquee-sidebar::before { top: 0; background: linear-gradient(to bottom, #0a0f1e 0%, transparent 100%); }
-        .qp-marquee-sidebar::after { bottom: 0; background: linear-gradient(to top, #0a0f1e 0%, transparent 100%); }
+        .qp-cdl-content { flex: 1; }
+        .qp-cdl-content h4 { font-size: 14px; font-weight: 700; color: #f1f5f9; margin: 0 0 2px; }
+        .qp-cdl-content p { font-size: 11px; color: #94a3b8; margin: 0; }
+        .qp-cdl-btn {
+          display: flex; align-items: center; gap: 6px;
+          padding: 8px 12px;
+          background: rgba(79,70,229,0.15);
+          border: 1px solid rgba(79,70,229,0.3);
+          color: #a5b4fc;
+          border-radius: 10px;
+          font-size: 12px; font-weight: 700;
+          text-decoration: none;
+          transition: all 0.2s;
+        }
+        .qp-cdl-btn:hover {
+          background: rgba(79,70,229,0.25);
+          color: #fff;
+          transform: translateY(-1px);
+        }
+
         .qp-super-bg-glow {
           position: absolute; inset: -50%;
           background: conic-gradient(from 0deg, transparent, #8b5cf6, transparent 30%);
@@ -891,61 +985,7 @@ const QuickPay = () => {
           50% { opacity: 0.8; transform: scale(0.95); }
           100% { opacity: 1; transform: scale(1); }
         }
-        .qp-sidebar-header {
-          display: flex; align-items: center; gap: 12px;
-          margin-bottom: 24px;
-          border-bottom: 1px solid rgba(255,255,255,0.06);
-          padding-bottom: 20px;
-        }
-        .qp-sidebar-icon {
-          width: 38px; height: 38px;
-          background: rgba(16,185,129,0.1);
-          border: 1px solid rgba(16,185,129,0.2);
-          border-radius: 12px;
-          display: flex; align-items: center; justify-content: center;
-          color: #34d399;
-        }
-        .qp-sidebar-title { font-size: 15px; font-weight: 800; color: #f1f5f9; margin: 0; }
-        .qp-sidebar-sub { font-size: 11px; font-weight: 600; color: #64748b; margin: 2px 0 0; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .qp-marquee-container {
-          height: 480px;
-          overflow: hidden;
-          position: relative;
-          margin-top: 10px;
-        }
-        .qp-marquee-container::before,
-        .qp-marquee-container::after {
-          content: ''; position: absolute; left: 0; right: 0; height: 100px; z-index: 2; pointer-events: none;
-        }
-        .qp-marquee-container::before { top: 0; background: linear-gradient(to bottom, #0a0f1e 0%, transparent 100%); }
-        .qp-marquee-container::after { bottom: 0; background: linear-gradient(to top, #0a0f1e 0%, transparent 100%); }
-
-        .qp-marquee-content {
-          display: flex; flex-direction: column; gap: 12px;
-          animation: qp-marquee-vertical 25s linear infinite;
-        }
-        .qp-marquee-content:hover { animation-play-state: paused; }
-
-        .qp-marquee-item {
-          display: flex; align-items: center; gap: 14px;
-          padding: 16px 20px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.06);
-          border-radius: 16px;
-          color: #94a3b8;
-          font-size: 16px; font-weight: 600;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          backdrop-filter: blur(10px);
-        }
-        .qp-marquee-item:hover {
-          background: rgba(79,70,229,0.1);
-          border-color: rgba(79,70,229,0.3);
-          color: #f1f5f9;
-          transform: translateX(10px);
-          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .qp-item-icon { color: #34d399; flex-shrink: 0; }
 
         /* ── Hero ── */
         .qp-hero { text-align: center; }
@@ -1314,34 +1354,52 @@ const QuickPay = () => {
             max-width: 620px; 
             display: block;
           }
-          .qp-marquee-container { height: auto; }
-          .qp-marquee-content { 
-            animation: none; 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 10px; 
-          }
-          .qp-marquee-item:nth-child(n+8) { display: none; }
-          
-          .qp-right-sidebar {
-            order: 3; /* Move to bottom on mobile */
-          }
           .qp-main {
-            order: 2;
+            flex: none;
+            width: 100%;
+            max-width: 620px;
+            order: 1;
           }
           .qp-sidebar {
-            order: 1;
+            order: 2;
+          }
+          .qp-right-sidebar {
+            order: 3;
+          }
+          .qp-sidebar {
+            order: 2;
+          }
+          .qp-right-sidebar {
+            order: 3;
           }
         }
 
         @media (max-width: 480px) {
-          .qp-marquee-content { grid-template-columns: 1fr; }
           .qp-card { padding: 24px 18px; border-radius: 20px; }
           .qp-input-row { flex-direction: column; }
           .qp-search-btn { padding: 14px; border-radius: 12px; width: 100%; }
           .qp-details-grid { grid-template-columns: 1fr; }
           .qp-detail-full { grid-column: span 1; }
-          .qp-trust { display: none; }
+          .qp-trust { 
+            flex-direction: column; 
+            gap: 8px; 
+          }
+          .qp-trust-dot { display: none; }
+          .qp-channels-card {
+            aspect-ratio: 16/9;
+          }
+          .qp-channels-title {
+            margin-bottom: 60px;
+          }
+          .qp-channels-logos-bar {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px;
+          }
+          .qp-ott-track {
+            animation-duration: 25s;
+          }
         }
       `}</style>
     </div>
