@@ -1,0 +1,21 @@
+# Dependency directories
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Environment variables and secrets
+.env
+.env.*
+firebase-service-account.json
+*.pem
+*.key
+
+# Server uploads
+server/uploads/
+uploads/
+
+# OS/System files
+.DS_Store
+Thumbs.db
