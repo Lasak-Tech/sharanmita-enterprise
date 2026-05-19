@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Phone, Lock, Eye, EyeOff, ArrowRight, Loader2 } from 'lucide-react';
+import api from '../utils/api';
 
 const Login = () => {
   const [useEmail, setUseEmail] = useState(true);
@@ -44,8 +45,7 @@ const Login = () => {
     setResetError('');
     setResetMessage('');
     try {
-      // In a real app, you would send an OTP here. For now, we simulate success if the phone exists.
-      const { data } = await axios.patch('http://localhost:5000/api/auth/reset-password', resetForm);
+      const { data } = await api.patch('/api/auth/reset-password', resetForm);
       setResetMessage(data.message);
       setTimeout(() => {
         setShowResetModal(false);

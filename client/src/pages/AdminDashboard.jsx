@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import * as XLSX from 'xlsx';
 import { 
   Users, 
@@ -75,9 +75,9 @@ const AdminDashboard = () => {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
       
       const [statsRes, customersRes, usersRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/customers/stats', config),
-        axios.get('http://localhost:5000/api/customers', config),
-        axios.get('http://localhost:5000/api/auth/users', config)
+        api.get('/api/customers/stats', config),
+        api.get('/api/customers', config),
+        api.get('/api/auth/users', config)
       ]);
       
       setStats(statsRes.data);
@@ -113,7 +113,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     try {
       const user = JSON.parse(localStorage.getItem('user'));
-      await axios.post('http://localhost:5000/api/customers', customerForm, {
+      await api.post('/api/customers', customerForm, {
         headers: { Authorization: `Bearer ${user.token}` }
       });
       setShowCustomerModal(false);
@@ -128,7 +128,7 @@ const AdminDashboard = () => {
   const handleAddEmployee = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', { 
+      await api.post('/api/auth/register', { 
         ...employeeForm, 
         name: 'Employee', 
         phone: 'N/A',
@@ -145,7 +145,7 @@ const AdminDashboard = () => {
   const handleAddAdmin = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', { 
+      await api.post('/api/auth/register', { 
         ...adminForm, 
         name: 'Administrator', 
         phone: 'N/A',
@@ -159,7 +159,7 @@ const AdminDashboard = () => {
         if (window.confirm('A user with this email already exists. Do you want to promote them to ADMIN?')) {
           try {
             const user = JSON.parse(localStorage.getItem('user'));
-            await axios.patch('http://localhost:5000/api/auth/update-role', 
+            await api.patch('/api/auth/update-role', 
               { email: adminForm.email, role: 'ADMIN' },
               { headers: { Authorization: `Bearer ${user.token}` } }
             );
@@ -180,7 +180,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     try {
       const user = JSON.parse(localStorage.getItem('user'));
-      await axios.patch('http://localhost:5000/api/auth/change-password', changePasswordForm, {
+      await api.patch('/api/auth/change-password', changePasswordForm, {
         headers: { Authorization: `Bearer ${user.token}` }
       });
       alert('Password updated for ' + changePasswordForm.email);
@@ -199,9 +199,9 @@ const AdminDashboard = () => {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
       
       if (isCustomer) {
-        await axios.delete(`http://localhost:5000/api/customers/${id}`, config);
+        await api.delete(`/api/customers/${id}`, config);
       } else {
-        await axios.delete(`http://localhost:5000/api/auth/users/${id}`, config);
+        await api.delete(`/api/auth/users/${id}`, config);
       }
       
       fetchData();
@@ -215,7 +215,7 @@ const AdminDashboard = () => {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      await axios.patch(`http://localhost:5000/api/customers/${id}/status`, { status: newStatus }, config);
+      await api.patch(`/api/customers/${id}/status`, { status: newStatus }, config);
       setCustomers(customers.map(c => c.id === id ? { ...c, status: newStatus } : c));
       
       // Update stats locally

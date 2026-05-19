@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import { Search, CreditCard, Loader2, CheckCircle2, Phone, Tag, Wifi, AlertCircle, LogIn, ChevronRight, Shield, Zap, Clock, MapPin, X, MonitorPlay } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -32,7 +32,7 @@ const QuickPay = () => {
     try {
       const queryVal = serialNumber.trim();
       const finalQuery = queryVal.length === 10 ? '91' + queryVal : queryVal;
-      const { data } = await axios.get(`http://localhost:8000/api/customers/lookup/${encodeURIComponent(finalQuery)}`);
+      const { data } = await api.get(`/api/customers/lookup/${encodeURIComponent(finalQuery)}`);
       setCustomer(data);
     } catch (err) {
       setError(err.response?.data?.message || 'No record found for this Phone Number. Please check and try again.');

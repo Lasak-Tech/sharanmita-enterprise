@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import { 
   CreditCard, 
   History, 
@@ -27,12 +27,12 @@ const CustomerDashboard = () => {
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
       
       // Fetch customer details using the new /me endpoint
-      const myProfileRes = await axios.get('http://localhost:5000/api/customers/me', config);
+      const myProfileRes = await api.get('/api/customers/me', config);
       const myProfile = myProfileRes.data;
       
       if (myProfile) {
         setCustomer(myProfile);
-        const paymentsRes = await axios.get(`http://localhost:5000/api/payments/customer/${myProfile.id}`, config);
+        const paymentsRes = await api.get(`/api/payments/customer/${myProfile.id}`, config);
         setPayments(paymentsRes.data);
       }
     } catch (error) {
@@ -58,7 +58,7 @@ const CustomerDashboard = () => {
           const user = JSON.parse(localStorage.getItem('user'));
           const config = { headers: { Authorization: `Bearer ${user.token}` } };
           
-          await axios.post('http://localhost:5000/api/payments', {
+          await api.post('/api/payments', {
             customerId: customer.id,
             amount: customer.monthlyAmount,
             method: 'ONLINE',

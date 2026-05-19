@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import { 
   Users, 
   Search, 
@@ -25,7 +25,7 @@ const EmployeeDashboard = () => {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      const { data } = await axios.get('http://localhost:5000/api/customers', config);
+      const { data } = await api.get('/api/customers', config);
       setCustomers(data);
     } catch (error) {
       console.error(error);
@@ -39,7 +39,7 @@ const EmployeeDashboard = () => {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
       const config = { headers: { Authorization: `Bearer ${user.token}` } };
-      await axios.patch(`http://localhost:5000/api/customers/${id}/status`, { status: 'PAID' }, config);
+      await api.patch(`/api/customers/${id}/status`, { status: 'PAID' }, config);
       
       // Update local state
       setCustomers(customers.map(c => c.id === id ? { ...c, status: 'PAID' } : c));

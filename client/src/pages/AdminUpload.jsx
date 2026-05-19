@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import { 
   FileUp, 
   CheckCircle2, 
@@ -38,7 +38,7 @@ const AdminUpload = () => {
         } 
       };
       
-      const { data } = await axios.post('http://localhost:5000/api/customers/upload', formData, config);
+      const { data } = await api.post('/api/customers/upload', formData, config);
       setResult(data);
     } catch (err) {
       const msg = err.response?.data?.message || err.message || 'Upload failed. Please check the file format.';
