@@ -533,7 +533,7 @@ const QuickPay = () => {
                    <div className="qp-feat-desc">5 Major OTT</div>
                  </div>
               </div>
-              <div className="qp-promo-price" style={{marginBottom: '10px'}}>₹4,999</div>
+              <div className="qp-promo-price" style={{marginBottom: '10px'}}>₹5,999</div>
               <p>Free Installation + 7 Months Service</p>
               <div className="qp-promo-note">6 Months + 1 Month Bonus</div>
             </div>
@@ -1386,10 +1386,10 @@ const QuickPay = () => {
           }
           .qp-trust-dot { display: none; }
           .qp-channels-card {
-            aspect-ratio: 16/9;
+            aspect-ratio: 4/3;
           }
           .qp-channels-title {
-            margin-bottom: 60px;
+            margin-bottom: 10px;
           }
           .qp-channels-logos-bar {
             flex-wrap: wrap;
